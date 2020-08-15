@@ -10,10 +10,19 @@ public class BallControl : MonoBehaviour
     // Besarnya gaya awal yang diberikan untuk mendorong bola
     public float xInitialForce;
     public float yInitialForce;
+
+    // Titik asal lintasan bola saat ini
+    private Vector2 trajectoryOrigin;
+
+    public Vector2 TrajectoryOrigin
+    {
+        get { return trajectoryOrigin; }
+    }
     
     // Start is called before the first frame update
     void Start()
     {
+        trajectoryOrigin = transform.position;
         rigidBody2D = GetComponent<Rigidbody2D>();
 
         //Mulai game
@@ -56,5 +65,10 @@ public class BallControl : MonoBehaviour
 
         // Setelah 2 detik berikan gaya ke bola
         Invoke("PushBall", 2f);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        trajectoryOrigin = transform.position;
     }
 }
