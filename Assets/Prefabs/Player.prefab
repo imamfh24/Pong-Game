@@ -146,5 +146,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upButton: 119
   downButton: 115
-  speed: 10
+  speed: 15
   yBoundary: 9

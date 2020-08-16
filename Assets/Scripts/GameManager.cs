@@ -45,6 +45,12 @@ public class GameManager : MonoBehaviour
     private void DebugWindowGUI()
     {
         DebugWindowGUIToggle();
+        DebugWingowGUIShow();
+
+    }
+
+    private void DebugWingowGUIShow()
+    {
         // Jika isDebugWindowShow == true, tampilkan text area untuk debug window
         if (isDebugWindowShow)
         {
@@ -84,7 +90,6 @@ public class GameManager : MonoBehaviour
             // Kembalikan warna lama GUI
             GUI.backgroundColor = oldColor;
         }
-
     }
 
     private void DebugWindowGUIToggle()
