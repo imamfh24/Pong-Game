@@ -20,6 +20,11 @@ public class BallControl : MonoBehaviour
 
     GameObject lastTouchPlayer;
 
+    public GameObject LastTouchPlayer
+    {
+        get { return lastTouchPlayer; }
+    }
+
     public Vector2 TrajectoryOrigin
     {
         get { return trajectoryOrigin; }

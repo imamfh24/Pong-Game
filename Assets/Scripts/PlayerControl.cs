@@ -24,8 +24,9 @@ public class PlayerControl : MonoBehaviour
     // Skor Pemain
     private int score;
 
-    
+
     [Header("Racket")]
+    public float timeScaleRacket = 5f;
     public Vector2 scaleRacket; // Size perbesar Racket
     private Vector2 defaultRacket; // Default Racket
 
@@ -81,19 +82,40 @@ public class PlayerControl : MonoBehaviour
     {
         // Dapatkan posisi raket sekarang
         Vector2 position = transform.position;
+        Vector2 localScale = transform.localScale;
 
-        // Jika posisi raket melewati batas atas (yBoundary), kembalikan ke batas atas tersebut.
-
-        if (position.y > yBoundary)
+        if( localScale == defaultRacket) // Racket Default
         {
-            position.y = yBoundary;
-        }
+            // Jika posisi raket melewati batas atas (yBoundary), kembalikan ke batas atas tersebut.
 
-        // Jika posisi raket melewati batas bawah (-yBoundary), kembalikan ke batas atas tersebut.
+            if (position.y > yBoundary)
+            {
+                position.y = yBoundary;
+            }
 
-        else if (position.y < -yBoundary)
+            // Jika posisi raket melewati batas bawah (-yBoundary), kembalikan ke batas atas tersebut.
+
+            else if (position.y < -yBoundary)
+            {
+                position.y = -yBoundary;
+            }
+
+        } else if (localScale == scaleRacket) // Racket dengan power Up
         {
-            position.y = -yBoundary;
+            float newYBoundary = yBoundary - (scaleRacket.y - defaultRacket.y);
+            // Jika posisi raket melewati batas atas (yBoundary), kembalikan ke batas atas tersebut.
+
+            if (position.y > newYBoundary)
+            {
+                position.y = newYBoundary;
+            }
+
+            // Jika posisi raket melewati batas bawah (-yBoundary), kembalikan ke batas atas tersebut.
+
+            else if (position.y < -newYBoundary)
+            {
+                position.y = -newYBoundary;
+            }
         }
 
         // Masukkan kembali posisinya ke transform.
@@ -122,14 +144,15 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    public void ChangeScaleRacket(bool value)
+    public void ChangeScaleRacket()
     {
-        if (value)
-        {
-            transform.localScale = scaleRacket;
-        } else
-        {
-            transform.localScale = defaultRacket;
-        }
+        StartCoroutine(ChangeScalesRacket());
+    }
+
+    IEnumerator ChangeScalesRacket()
+    {
+        transform.localScale = scaleRacket;
+        yield return new WaitForSeconds(timeScaleRacket);
+        transform.localScale = defaultRacket;
     }
 }

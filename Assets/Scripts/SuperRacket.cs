@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class SuperRacket : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collision.name == "Ball")
+        {
+            GameObject player = collision.gameObject.GetComponent<BallControl>().LastTouchPlayer;
+            if (player)
+            {
+                player.GetComponent<PlayerControl>().ChangeScaleRacket();
+                Destroy(gameObject);
+            }
+        }
     }
 }

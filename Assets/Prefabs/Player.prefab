@@ -148,3 +148,5 @@ MonoBehaviour:
   downButton: 115
   speed: 15
   yBoundary: 9
+  timeScaleRacket: 5
+  scaleRacket: {x: 1, y: 2}

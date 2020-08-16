@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
 
             // Dan kembalikan boile ke tengah
             ball.SendMessage("ResetBall", null, SendMessageOptions.RequireReceiver);
+            spawnItem.IsSpawn = false;
         }
         else if (player2.Score == maxScore)
         {
@@ -122,6 +123,7 @@ public class GameManager : MonoBehaviour
 
             // Dan kembalikan bola ke tengah
             ball.SendMessage("ResetBall", null, SendMessageOptions.RequireReceiver);
+            spawnItem.IsSpawn = false;
         }
     }
 
@@ -143,6 +145,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetItem()
     {
+        spawnItem.IsSpawn = true;
         spawnItem.DestroyChildSpawn();
     }
 

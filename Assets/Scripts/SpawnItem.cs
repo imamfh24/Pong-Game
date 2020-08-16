@@ -9,14 +9,21 @@ public class SpawnItem : MonoBehaviour
     [SerializeField] float offsetSpawn = 10f;
 
     private float timerSpawn = 0f;
+    private bool isSpawn = true;
 
     // Update is called once per frame
     void Update()
     {
-        if(transform.childCount <= 2)
+        if(transform.childCount <= 2 && isSpawn)
         {
             TimerSpawnItem();
         }
+    }
+
+    public bool IsSpawn
+    {
+        set { isSpawn = value; }
+        get { return isSpawn; }
     }
 
     private void TimerSpawnItem()
