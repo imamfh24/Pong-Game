@@ -815,22 +815,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
-    - target: {fileID: 1327207224262693528, guid: ba6d857ab2bcc314887c61d0ca4284b9, type: 3}
-      propertyPath: xInitialForce
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327207224262693528, guid: ba6d857ab2bcc314887c61d0ca4284b9, type: 3}
-      propertyPath: yInitialForce
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327207224262693528, guid: ba6d857ab2bcc314887c61d0ca4284b9, type: 3}
-      propertyPath: initialForce
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327207224262693528, guid: ba6d857ab2bcc314887c61d0ca4284b9, type: 3}
-      propertyPath: speedForce
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 1327207224262693529, guid: ba6d857ab2bcc314887c61d0ca4284b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

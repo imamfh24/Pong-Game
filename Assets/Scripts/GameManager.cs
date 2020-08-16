@@ -111,20 +111,23 @@ public class GameManager : MonoBehaviour
         {
             // Tampilkan teks PLAYER ONE WINS di bagian kiri layar
             GUI.Label(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 10, 2000, 1000), "PLAYER ONE WINS");
-
-            // Dan kembalikan boile ke tengah
-            ball.SendMessage("ResetBall", null, SendMessageOptions.RequireReceiver);
-            spawnItem.IsSpawn = false;
+            PlayerWinBallStop();
         }
         else if (player2.Score == maxScore)
         {
             // Tampilkan teks PLAYER TWO WINS di bagian kanan layar
             GUI.Label(new Rect(Screen.width / 2 + 30, Screen.height / 2 - 10, 2000, 1000), "PLAYER TWO WINS");
-
-            // Dan kembalikan bola ke tengah
-            ball.SendMessage("ResetBall", null, SendMessageOptions.RequireReceiver);
-            spawnItem.IsSpawn = false;
+            PlayerWinBallStop();
         }
+    }
+
+    private void PlayerWinBallStop()
+    {
+        // Dan kembalikan bola ke tengah
+        ball.SendMessage("ResetBall", null, SendMessageOptions.RequireReceiver);
+        ResetItem();
+        spawnItem.IsSpawn = false;
+        ball.GetComponent<BallControl>().AnimationFireBall(false);
     }
 
     private void RestartButtonGUI()
@@ -139,6 +142,7 @@ public class GameManager : MonoBehaviour
 
             // Dan Restart Game
             ResetItem();
+            ball.GetComponent<BallControl>().AnimationFireBall(false);
             ball.SendMessage("RestartGame", 1f, SendMessageOptions.RequireReceiver);
         }
     }

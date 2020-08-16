@@ -29,12 +29,23 @@ public class BallControl : MonoBehaviour
     {
         get { return trajectoryOrigin; }
     }
-    
+
+    Animator animator;
+
+    private bool isFireBall = false;
+
+    public bool IsFireBall
+    {
+        set { isFireBall = value; }
+        get { return isFireBall; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         trajectoryOrigin = transform.position;
         rigidBody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         //Mulai game
         RestartGame();
@@ -74,6 +85,8 @@ public class BallControl : MonoBehaviour
 
     void RestartGame()
     {
+        AnimationFireBall(false);
+
         // Kembalikan bola ke posisi semula
         ResetBall();
 
@@ -89,17 +102,32 @@ public class BallControl : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D coll)
     {
         PlayerCollision(coll);
+        
     }
 
     private void PlayerCollision(Collision2D coll)
     {
         if (coll.gameObject.name == PLAYER_1)
         {
+            if (IsFireBall)
+            {
+                GameObject player2 = GameObject.Find(PLAYER_2);
+                player2.GetComponent<PlayerControl>().IncrementScore();
+                RestartGame();
+                return;
+            }
             BounceFromRacket(coll);
             lastTouchPlayer = GameObject.Find(PLAYER_1);
         }
         else if (coll.gameObject.name == PLAYER_2)
         {
+            if (IsFireBall)
+            {
+                GameObject player1 = GameObject.Find(PLAYER_1);
+                player1.GetComponent<PlayerControl>().IncrementScore();
+                RestartGame();
+                return;
+            }
             BounceFromRacket(coll);
             lastTouchPlayer = GameObject.Find(PLAYER_2);
         }
@@ -111,5 +139,11 @@ public class BallControl : MonoBehaviour
         Vector2 arah = new Vector2(rigidBody2D.velocity.x, sudut).normalized;
         rigidBody2D.velocity = new Vector2(0, 0);
         rigidBody2D.AddForce(arah * speedForce);
+    }
+
+    public void AnimationFireBall(bool value)
+    {
+        IsFireBall = value;
+        animator.SetBool("FireBall", IsFireBall);
     }
 }
