@@ -20,6 +20,8 @@ public class GoalWall : MonoBehaviour
                 //...restart game setelah bola mengenai dinding.
                 collider.gameObject.SendMessage("RestartGame", 2f, SendMessageOptions.RequireReceiver);
             }
+
+            gameManager.ResetItem();
         }
     }
 }

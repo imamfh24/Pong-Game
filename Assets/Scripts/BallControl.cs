@@ -15,6 +15,11 @@ public class BallControl : MonoBehaviour
     // Titik asal lintasan bola saat ini
     private Vector2 trajectoryOrigin;
 
+    const string PLAYER_1 = "Player 1";
+    const string PLAYER_2 = "Player 2";
+
+    GameObject lastTouchPlayer;
+
     public Vector2 TrajectoryOrigin
     {
         get { return trajectoryOrigin; }
@@ -55,12 +60,10 @@ public class BallControl : MonoBehaviour
             Vector2 arah = new Vector2(-speedForce, randomInitialForce).normalized;
             // Gunakan gaya untuk menggerakkan bola ini
             rigidBody2D.AddForce(arah * speedForce);
-            Debug.Log(arah * speedForce);
         } else
         {
             Vector2 arah = new Vector2(speedForce, randomInitialForce).normalized;
             rigidBody2D.AddForce(arah * speedForce);
-            Debug.Log(arah * speedForce);
         }
     }
 
@@ -80,12 +83,28 @@ public class BallControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.name == "Player 1" || coll.gameObject.name == "Player 2")
+        PlayerCollision(coll);
+    }
+
+    private void PlayerCollision(Collision2D coll)
+    {
+        if (coll.gameObject.name == PLAYER_1)
         {
-            float sudut = (transform.position.y - coll.transform.position.y) * 5f;
-            Vector2 arah = new Vector2(rigidBody2D.velocity.x, sudut).normalized;
-            rigidBody2D.velocity = new Vector2(0, 0);
-            rigidBody2D.AddForce(arah * speedForce);
+            BounceFromRacket(coll);
+            lastTouchPlayer = GameObject.Find(PLAYER_1);
         }
+        else if (coll.gameObject.name == PLAYER_2)
+        {
+            BounceFromRacket(coll);
+            lastTouchPlayer = GameObject.Find(PLAYER_2);
+        }
+    }
+
+    private void BounceFromRacket(Collision2D coll)
+    {
+        float sudut = (transform.position.y - coll.transform.position.y) * 5f;
+        Vector2 arah = new Vector2(rigidBody2D.velocity.x, sudut).normalized;
+        rigidBody2D.velocity = new Vector2(0, 0);
+        rigidBody2D.AddForce(arah * speedForce);
     }
 }

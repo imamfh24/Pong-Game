@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
 
     // Objek untuk menggambar prediksi lintasan bola
     public Trajectory trajectory;
+
+    // Spawn Item
+    public SpawnItem spawnItem;
     // Start is called before the first frame update
     void Start()
     {
@@ -131,9 +134,16 @@ public class GameManager : MonoBehaviour
             player1.ResetScore();
             player2.ResetScore();
 
+
             // Dan Restart Game
+            ResetItem();
             ball.SendMessage("RestartGame", 1f, SendMessageOptions.RequireReceiver);
         }
+    }
+
+    public void ResetItem()
+    {
+        spawnItem.DestroyChildSpawn();
     }
 
     private void PlayerScoreGUI()

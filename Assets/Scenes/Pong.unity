@@ -474,6 +474,7 @@ MonoBehaviour:
   ball: {fileID: 1327207224184278946}
   maxScore: 5
   trajectory: {fileID: 794809295}
+  spawnItem: {fileID: 1276963657}
 --- !u!1 &794809292
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,6 +608,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6731710a4b1add441a68ad2e6feca6aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1276963655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1276963656}
+  - component: {fileID: 1276963657}
+  m_Layer: 0
+  m_Name: SpawnItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1276963656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276963655}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1276963657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276963655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ab56ef23a786249a5c140f6a963d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsArray:
+  - {fileID: 7113396583518205506, guid: 9023958386e4a5040a1e8092163ab436, type: 3}
+  - {fileID: 1016306008636638889, guid: c5f95c8298bcb3f4495acb5d91d13058, type: 3}
+  delaySpawn: 5
+  offsetSpawn: 5
 --- !u!1001 &1638546998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -780,7 +829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1327207224262693528, guid: ba6d857ab2bcc314887c61d0ca4284b9, type: 3}
       propertyPath: speedForce
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1327207224262693529, guid: ba6d857ab2bcc314887c61d0ca4284b9, type: 3}
       propertyPath: m_LocalPosition.x

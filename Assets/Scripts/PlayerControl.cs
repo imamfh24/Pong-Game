@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    [Header("Button")]
     // Tombol untuk menggerakkan ke atas
     public KeyCode upButton = KeyCode.W;
 
     // Tombol untuk menggerakkan ke bawah
     public KeyCode downButton = KeyCode.S;
 
+    [Header("Config")]
     // Kecepatan gerak
     public float speed = 10f;
 
@@ -22,6 +24,11 @@ public class PlayerControl : MonoBehaviour
     // Skor Pemain
     private int score;
 
+    
+    [Header("Racket")]
+    public Vector2 scaleRacket; // Size perbesar Racket
+    private Vector2 defaultRacket; // Default Racket
+
     // Titik tumbukan terakhir dengan bola, untuk menampilkan variabel-variabel fisika terkait tumbukan tersebut
     private ContactPoint2D lastContactPoint2D;
 
@@ -33,6 +40,7 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
+        defaultRacket = transform.localScale;
     }
 
     void Update()
@@ -111,6 +119,17 @@ public class PlayerControl : MonoBehaviour
         if (collision.gameObject.name.Equals("Ball"))
         {
             lastContactPoint2D = collision.GetContact(0);
+        }
+    }
+
+    public void ChangeScaleRacket(bool value)
+    {
+        if (value)
+        {
+            transform.localScale = scaleRacket;
+        } else
+        {
+            transform.localScale = defaultRacket;
         }
     }
 }
