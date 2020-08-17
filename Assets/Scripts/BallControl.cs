@@ -17,6 +17,7 @@ public class BallControl : MonoBehaviour
 
     const string PLAYER_1 = "Player 1";
     const string PLAYER_2 = "Player 2";
+    const string GAME_MANAGER = "Game Manager";
 
     GameObject lastTouchPlayer;
 
@@ -86,6 +87,9 @@ public class BallControl : MonoBehaviour
     void RestartGame()
     {
         AnimationFireBall(false);
+
+        GameObject gameManager = GameObject.Find(GAME_MANAGER);
+        gameManager.GetComponent<GameManager>().ResetItem();
 
         // Kembalikan bola ke posisi semula
         ResetBall();
